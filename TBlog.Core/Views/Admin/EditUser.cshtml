@@ -1,0 +1,74 @@
+﻿@model EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User Pofile";
+
+    var groupInput = string.Empty;
+    if (Model.Groups.Any())
+    {
+        foreach (var groupName in Model.Groups)
+        {
+            //groupInput += "[" + groupName + "] ";
+            groupInput += $"[{groupName}] "; ;
+        }
+    }
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="container">
+    <form asp-controller="Admin" asp-action="EditUser" method="post" class="mt-4">
+        <div class="form-group row">
+            <label asp-for="UserId" class="col-md-2 col-form-label"></label>
+            <div class="col-md-8">
+                <input asp-for="UserId" disabled class="form-control">
+            </div>
+        </div>
+        <input type="hidden" asp-for="UserId" />
+        <div class="form-group row">
+            <label asp-for="Email" class="col-md-2 col-form-label"></label>
+            <div class="col-md-8">
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="FirstName" class="col-md-2 col-form-label"></label>
+            <div class="col-md-8">
+                <input asp-for="FirstName" class="form-control">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="LastName" class="col-md-2 col-form-label"></label>
+            <div class="col-md-8">
+                <input asp-for="LastName" class="form-control">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Groups" class="col-md-2 col-form-label"></label>
+            <div class="col-md-8 input-group">
+                <input value="@groupInput" disabled class="form-control">
+                <div class="input-group-append">
+                    <a asp-controller="Admin" asp-action="Index" asp-route-tab="groups" class="input-group-text" title="Edit Groups" data-toggle="tooltip">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-md-2 col-md-8">
+                <div class="custom-control custom-checkbox">
+                    <input asp-for="EmailConfirmed" class="custom-control-input">
+                    <label asp-for="EmailConfirmed" class="custom-control-label"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-5 text-center">
+            <button type="submit" class="btn btn-primary btn-fixed-width">Save</button>
+            <a asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@Model.UserId" data-target="#delete-modal" data-toggle="modal" class="btn btn-danger btn-fixed-width">Delete</a>
+            <a asp-controller="Admin" asp-action="Index" asp-route-tab="users" class="btn btn-outline-dark btn-fixed-width">Cancel</a>
+        </div>
+    </form>
+</div>

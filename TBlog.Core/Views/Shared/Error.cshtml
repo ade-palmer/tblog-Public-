@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+
+<h4>
+    An error occured while processing your request.
+</h4>
+<hr />
+<p>The support team have been notified and we are working on the fix</p>
+
+<h5>Exception Details:</h5>
+<div class="alert alert-danger">
+    <h5>Exception Path</h5>
+    <hr />
+    <p>@ViewBag.ExceptionPath</p>
+</div>
+
+<div class="alert alert-danger">
+    <h5>Exception Message</h5>
+    <hr />
+    <p>@ViewBag.ExceptionMessage</p>
+</div>

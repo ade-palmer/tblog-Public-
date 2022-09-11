@@ -1,0 +1,35 @@
+﻿@model SettingsViewModel
+
+
+<div class="container table-responsive">
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Setting</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label asp-for="@Model.PageCount"></label></td>
+                <td>@Model.PageCount</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.MailServer"></label></td>
+                <td>@Model.MailServer</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.MailPort"></label></td>
+                <td>@Model.MailPort</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.SenderName"></label></td>
+                <td>@Model.SenderName</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.Sender"></label></td>
+                <td>@Model.Sender</td>
+            </tr>
+       </tbody>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - t-blog</title>
+    <link href="~/css/custom-bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid px-3">
+        <div class="row min-vh-100">
+            <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5 d-flex justify-content-center align-items-center">
+                <div class="w-75 py-5 px-md-5 px-xl-6 position-relative">
+                    @RenderBody()
+                </div>
+                <div class="position-absolute" style="top:25px; right:15px;">
+                    <a asp-controller="Blog" asp-action="Index" class="text-secondary">
+                        <i class="fa fa-2x fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-5 col-lg-6 col-xl-7 d-none d-sm-block">
+                <!-- Image as CSS background -->
+                <div id="accountImage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<ul class="nav nav-pills nav-fill  py-4">
+    <li class="nav-item">
+        <a asp-controller="Manage" asp-action="AccountDetails" class="nav-link active">Account</a>
+    </li>
+    <li class="nav-item">
+        <a asp-controller="Manage" asp-action="ChangePassword" class="nav-link">Password</a>
+    </li>
+</ul>
+
+<partial name="_StatusMessage" />
+
+<form asp-controller="Manage" asp-action="AccountDetails" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group text-muted">
+        <small>
+            <label asp-for="UserName"></label>
+        </small>
+        <input asp-for="UserName" class="form-control" readonly />
+    </div>
+    <div class="form-group text-muted">
+        <small>
+            <label asp-for="Email"></label>
+        </small>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group text-muted">
+        <small>
+            <label asp-for="FirstName"></label>
+        </small>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group text-muted">
+        <small>
+            <label asp-for="LastName"></label>
+        </small>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group  pt-4">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Save Changes</button>
+    </div>
+</form>

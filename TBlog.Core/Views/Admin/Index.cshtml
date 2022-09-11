@@ -1,0 +1,53 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "Administration";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+            <li class="nav-item">
+                <a asp-controller="Admin" asp-action="Index" asp-route-tab="users" class="nav-link @(Model.UsersTabActive ? "active":"")" role="tab" aria-controls="users" aria-selected=@Model.UsersTabActive>Users</a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Admin" asp-action="Index" asp-route-tab="groups" class="nav-link @(Model.GroupsTabActive ? "active":"")" role="tab" aria-controls="groups" aria-selected=@Model.GroupsTabActive>Groups</a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Admin" asp-action="Index" asp-route-tab="settings" class="nav-link @(Model.SettingsTabActive ? "active":"")" role="tab" aria-controls="settings" aria-selected=@Model.SettingsTabActive>Settings</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content mt-3">
+            <div class="tab-pane @(Model.UsersTabActive ? "active":"")" id="users" role="tabpanel" aria-labelledby="users-tab">
+                <partial name="_AdminUsersPartial.cshtml" for="Users">
+            </div>
+            <div class="tab-pane @(Model.GroupsTabActive ? "active":"")" id="groups" role="tabpanel" aria-labelledby="groups-tab">
+                <partial name="_AdminGroupsPartial.cshtml" for="Groups">
+                <p class="ml-3">Total Registered User: @Model.UserCount</p>
+
+            </div>
+            <div class="tab-pane @(Model.SettingsTabActive ? "active":"")" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <partial name="_AdminSettingsPartial.cshtml" for="Settings">
+                <p class="ml-3">*Configuration settings taken from appsettings.json file</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div id="delete-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Content loaded via JS using DeletePost Partial View -->
+        </div>
+    </div>
+</div>
+
+@section JqueryScripts {
+    <partial name="_JQuery_Modal" />
+}

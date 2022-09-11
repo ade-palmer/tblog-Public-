@@ -1,0 +1,98 @@
+﻿@model PostViewModel
+
+@inject SignInManager<ApplicationUser> signInManager
+
+@{
+    ViewData["Title"] = "Post";
+    var returnUrl = Context.Request.Path + "#comments";
+}
+
+<div class="container">
+    <article>
+        <header>
+            <!-- Delete Modal Activation -->
+            <span class="d-inline-block float-right" title="Delete" data-keyboard="true" data-toggle="tooltip">
+                <a Confirmed="@Model.IsEditor" asp-controller="Blog" asp-action="DeletePost" asp-route-postId="@Model.PostId" data-target="#delete-modal" data-toggle="modal" class="btn btn-light btn-sm mr-2 mt-2">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </span>
+
+            <!-- Delete Modal -->
+            <div id="delete-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Content loaded via JS using DeletePost Partial View -->
+                    </div>
+                </div>
+            </div>
+
+            <a Confirmed="@Model.IsEditor" asp-controller="Blog" asp-action="EditPost" asp-route-Id="@Model.PostId" class="btn btn-light btn-sm float-right mr-2 mt-2" title="Edit Post" data-toggle="tooltip">
+                <i class="fa fa-pencil"></i>
+            </a>
+
+            <a asp-controller="Blog" asp-action="Index" class="btn btn-light btn-sm float-right mr-2 mt-2" title="See All Posts" data-toggle="tooltip">
+                <i class="fa fa-list"></i>
+            </a>
+
+            <h3 class="mb-0">@Model.Title</h3>
+            <small class="text-muted">
+                @if (Model.IsPublished)
+                {
+                    @:Published @Html.DisplayFor(modelItem => Model.PublishedDate) by @Html.DisplayFor(modelItem => Model.PublishedBy)
+                }
+                else
+                {
+                    @:<span class="text-danger">Not Published</span>
+                }
+            </small>
+        </header>
+
+        <div class="my-3">@Html.Raw(Model.Content)</div>
+
+    </article>
+
+    <section class="mt-5">
+
+        <a id="comments" />
+
+        <form asp-controller="Blog" asp-action="AddComment" method="post">
+            <a Confirmed="!signInManager.IsSignedIn(User)" asp-controller="Account" asp-action="Login" asp-route-returnurl="@returnUrl" class="btn btn-light btn-sm float-right mr-2 mt-2" title="Sign-in to add a Comment" data-toggle="tooltip">
+                <i class="fa fa-sign-in fa-lg"></i>
+            </a>
+            <button Confirmed="signInManager.IsSignedIn(User)" type="submit" class="btn btn-light btn-sm float-right mr-2 mt-2" title="Add Comment" data-toggle="tooltip">
+                <i class="fa fa-plus"></i>
+            </button>
+
+            <div class="border-top pt-2 mb-4"><h5>Comments @Model.CommentCount</h5></div>
+
+            <input type="hidden" asp-for="PostId" />
+            <input type="hidden" asp-for="@returnUrl" />
+
+            <div class="form-group">
+                <textarea Confirmed="signInManager.IsSignedIn(User)" id="Content" name="Content" class="form-control" rows="3"></textarea>
+            </div>
+        </form>
+
+        @foreach (var comment in Model.Comments.OrderBy(o => o.PublishedDate))
+        {
+            <article class="mb-4">
+                <footer class="ml-2">
+                    <h6 class="card-title mb-0">@Html.DisplayFor(modelItem => comment.PublishedBy)</h6>
+                    <span class="card-subtitle text-muted"><small>@Html.DisplayFor(modelItem => comment.PublishedDate)</small></span>
+                </footer>
+                <div class="card ">
+                    <div class="card-body">
+                        <a Confirmed="@comment.IsEditor" href="#" class="btn btn-light btn-sm float-right" title="Edit" data-toggle="tooltip">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <p class="card-text">@Html.DisplayFor(modelItem => comment.Content)</p>
+                    </div>
+                </div>
+            </article>
+        }
+    </section>
+</div>
+
+@section JqueryScripts {
+    <partial name="_JQuery_Modal" />
+}

@@ -1,0 +1,80 @@
+﻿@model PaginationViewModel
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<a confirmed="@Model.SearchString.Any()" asp-controller="Blog" asp-action="Index" class="btn btn-light btn-sm float-right mr-2 mt-2" title="See All Posts" data-toggle="tooltip">
+    <i class="fa fa-list"></i>
+</a>
+
+<div class="container">
+    @if (!Model.Posts.Any())
+    {
+        <div class="text-center">
+            <h3>No Posts Found</h3>
+            <p class="my-5">
+                Either no post exist or your search result has return no posts.
+            </p>
+        </div>
+    }
+
+    @foreach (var post in Model.Posts)
+    {
+        var pubDate = Html.DisplayFor(modelItem => post.PublishedDate);
+        <article>
+            <header>
+                <a asp-controller="post" asp-action="@post.Slug"><h3 class="mb-0">@post.Title</h3></a>
+                <small class="text-muted">
+                    @if (post.IsPublished)
+                    {
+                        @:Published @Html.DisplayFor(modelItem => post.PublishedDate)
+                    }
+                    else
+                    {
+                        @:<span class="text-danger">Not Published</span>
+                    }
+                </small>
+            </header>
+            <div class="my-3">@post.BriefDescription</div>
+            <footer>
+                <div class="border-top pt-1 mb-5">
+                    <small>
+                        <a asp-controller="post" asp-action="@post.Slug" asp-fragment="comments">Comments @post.CommentCount</a>
+                    </small>
+                </div>
+            </footer>
+        </article>
+    }
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="d-flex justify-content-center" aria-label="All blogs navigation">
+            <ul class="pagination">
+                <li class="page-item @(!Model.ShowFirst? "disabled":"")">
+                    <a asp-controller="page" asp-action="1" asp-route-searchString="@Model.SearchString" class="page-link">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                    <a asp-controller="page" asp-action="@(Model.CurrentPage - 1)" asp-route-searchString="@Model.SearchString" class="page-link">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">@Model.CurrentPage of @Model.TotalPages</span>
+                </li>
+                <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                    <a asp-controller="page" asp-action="@(Model.CurrentPage + 1)" asp-route-searchString="@Model.SearchString" class="page-link">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item  @(!Model.ShowLast? "disabled":"")">
+                    <a asp-controller="page" asp-action="@Model.TotalPages" asp-route-searchString="@Model.SearchString" class="page-link">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>
+

@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bootstrap@4.3.1",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map"
+      ]
+    },
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "dist/jquery.min.js",
+        "dist/jquery.min.map"
+      ]
+    },
+    {
+      "library": "summernote@0.8.12",
+      "destination": "wwwroot/lib/summernote/",
+      "files": [
+        "dist/summernote-bs4.css",
+        "dist/summernote-bs4.js",
+        "dist/summernote-bs4.js.map",
+        "dist/summernote-bs4.min.js",
+        "dist/summernote-lite.css",
+        "dist/summernote-lite.js",
+        "dist/summernote-lite.js.map",
+        "dist/summernote-lite.min.js",
+        "dist/summernote.css",
+        "dist/summernote.js",
+        "dist/summernote.js.map",
+        "dist/summernote.min.js",
+        "dist/font/summernote.eot",
+        "dist/font/summernote.ttf",
+        "dist/font/summernote.woff"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - t-blog</title>
+    <link rel="icon" href="~/img/favicon-16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="~/img/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="~/img/favicon-48.png" sizes="48x48" type="image/png">
+    <link rel="icon" href="~/img/favicon-64.png" sizes="62x62" type="image/png">
+    <link href="~/css/custom-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/summernote/dist/summernote-bs4.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-background">
+        <nav class="navbar navbar-expand navbar-dark mb-3">
+            <div class="container">
+                <a class="navbar-brand ml-3" title="t-blog" data-toggle="tooltip" asp-controller="Blog" asp-action="Index">
+                    <img src="~/img/tblog-logo-30.png" />
+                </a>
+                <partial name="_NavbarOptions" />
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main role="main" class="post-body">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="blog-search" class="modal fade" role="dialog" aria-labelledby="Search" tabindex='-1'>
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <form asp-controller="Blog" asp-action="Index" method="Get" role="search">
+                        <input name="searchString" id="term" class="form-control form-control-lg" placeholder="Search..." autocomplete="off" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer small text-muted mb-4">
+        <div class="container">
+            <div class="float-right mr-4">Powered by <a href="https://github.com/ade-palmer/tblog.core" rel="noopener noreferrer" target="_blank">t-blog.core</a></div>
+            <div class="ml-4">&copy; @DateTime.Now.Year | t-blog | <a asp-controller="Shared" asp-action="Privacy">Privacy</a> | <a asp-controller="Shared" asp-action="TermsAndConditions">Terms of Use</a></div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/summernote/dist/summernote-bs4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Set focus on Search modal input when active
+            $('.modal').on('shown.bs.modal', function () {
+              $(this).find('input:first').focus();
+            })
+
+            @RenderSection("JqueryScripts", required: false)
+        });
+    </script>
+</body>
+</html>

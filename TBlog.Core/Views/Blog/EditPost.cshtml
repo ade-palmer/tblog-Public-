@@ -1,0 +1,54 @@
+﻿@model EditPostViewModel
+
+@{
+    ViewData["Title"] = "Edit - " + (Model.Title);
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<form asp-controller="Blog" asp-action="EditPost" method="post" class="container">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="PostId" />
+    <input type="hidden" asp-for="Slug" />
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BriefDescription"></label>
+        <textarea asp-for="BriefDescription" rows="4" class="form-control"></textarea>
+        <span asp-validation-for="BriefDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" id="post-content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input asp-for="IsPublished" class="custom-control-input" />
+            <label asp-for="IsPublished" class="custom-control-label">
+            </label>
+        </div>
+    </div>
+    <div class="form-group mt-5 text-center">
+        <button type="submit" class="btn btn-primary btn-fixed-width">Save</button>
+        <a asp-controller="blog" asp-action="DeletePost" asp-route-PostId="@Model.PostId" data-target="#delete-modal" data-toggle="modal" class="btn btn-danger btn-fixed-width">Delete</a>
+        <a asp-controller="post" asp-action="@Model.Slug" class="btn btn-outline-dark btn-fixed-width">Cancel</a>
+    </div>
+</form>
+
+<!-- MODAL -->
+<div id="delete-modal" class="modal fade hidden-print" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section JqueryScripts {
+    <partial name="_JQuery_Summernote" />
+    <partial name="_JQuery_Modal" />
+}

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UsersViewModel>
+
+@if (!Model.Any())
+{
+    <p>No Users exist</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th class="text-center">Confirmed</th>
+                    <th class="text-center">Locked Out</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Email</td>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td class="text-center">
+                            <i confirmed="item.EmailConfirmed" class="fa fa-check-circle text-success"></i>
+                            <i confirmed="!item.EmailConfirmed" class="fa fa-times-circle text-danger"></i>
+                        </td>
+                        <td class="text-center">
+                            <i confirmed="item.LockedOut" class="fa fa-check-circle text-danger"></i>
+                        </td>
+                        <td nowrap>
+                            <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@item.UserId" title="Edit" data-keyboard="true" data-toggle="tooltip" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <span title="Delete" data-keyboard="true" data-toggle="tooltip">
+                                <a asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@item.UserId" data-target="#delete-modal" data-toggle="modal" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+

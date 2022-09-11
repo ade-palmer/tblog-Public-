@@ -1,0 +1,52 @@
+﻿@model EditGroupViewModel
+
+@{
+    ViewData["Title"] = $"Edit '{Model.GroupName}' Group";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+
+<div class="table-responsive mt-4">
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Members)
+            {
+                <tr>
+                    <td>@item.Email</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditGroupUser" asp-route-id="@item.UserId" asp-route-group="@Model.GroupName" title="Remove from group" data-keyboard="true" data-toggle="tooltip" class="btn btn-danger btn-sm">
+                            <i class="fa fa-minus-square"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model.NonMembers)
+            {
+                <tr>
+                    <td>@item.Email</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditGroupUser" asp-route-id="@item.UserId" asp-route-group="@Model.GroupName" title="Add to group" data-keyboard="true" data-toggle="tooltip" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="text-center mt-2">
+    <a asp-controller="Admin" asp-action="Index" asp-route-tab="groups" class="btn btn-primary btn-fixed-width">Close</a>
+</div>

@@ -1,0 +1,40 @@
+﻿@model AddPostViewModel
+
+@{
+    ViewData["Title"] = "Add New Post";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form asp-controller="Blog" asp-action="AddPost" method="post" class="container">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BriefDescription"></label>
+        <textarea asp-for="BriefDescription" rows="4" class="form-control"></textarea>
+        <span asp-validation-for="BriefDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" id="post-content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input asp-for="IsPublished" class="custom-control-input" />
+            <label asp-for="IsPublished" class="custom-control-label">
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+@section JqueryScripts {
+    <partial name="_JQuery_Summernote" />
+}
