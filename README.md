@@ -6,7 +6,7 @@ This is my first attempt at a blogging site, developed in ASP.Net Core 2 using M
 
 ![image](https://user-images.githubusercontent.com/28670731/189540066-fce8bc17-6efb-4041-87a7-7001b2f307ac.png)
 
-The Application is developed as a MVC project with features like .Net Identity, Tag Helpers, Partial Views, Modals, Dependency Injection, Repository Pattern along with many other .Net features.
+The Application was developed as a MVC project with features like .Net Identity, Tag Helpers, Partial Views, Modals, Dependency Injection, Repository Pattern along with many other .Net features.
 
 **Search Option**
 
