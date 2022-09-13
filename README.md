@@ -1,6 +1,6 @@
 # TBlog (Public)
 
-This is my first attempt at a blogging site, developed in ASP.Net Core 2 using MVC. As I wanted to get skills integrating with SQL I decided not to use Markup/down for the blogs and store everything in an SQL database.
+This is my first attempt at a fully featured ASP.Net Core MVC application using .Net Core 2. As I wanted to get skills integrating with SQL I decided not to use Markup/down for the blogs and store everything in an SQL database.
 
 **Demo:** https://tblog.co.uk/
 
